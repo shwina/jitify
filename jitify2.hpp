@@ -5758,7 +5758,7 @@ class ProgramCache {
         mem_cache_(max_in_mem),
         file_cache_(std::move(file_cache_path),
                     max_files ? max_files : max_in_mem,
-                    /* prefix = */ preprog_.name() + ".", file_suffix),
+                    /* prefix = */ std::regex_replace(preprog_.name(), std::regex("/"), "_") + ".", file_suffix),
         hash_(hash),
         equal_(equal),
         to_filename_(to_filename) {}
