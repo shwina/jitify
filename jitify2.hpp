@@ -53,9 +53,9 @@
 #include <unordered_map>
 #include <vector>
 
-#if __cplusplus >= 201703L
-#include <string_view>
-#endif
+// #if __cplusplus >= 201703L
+// #include <string_view>
+// #endif
 
 #else  // not JITIFY_SERIALIZATION_ONLY
 
@@ -176,13 +176,13 @@ namespace jitify2 {
 using StringVec = std::vector<std::string>;
 using StringMap = std::unordered_map<std::string, std::string>;
 
-#if __cplusplus >= 201703L
-using StringRef = std::string_view;
-using StringSlice = std::string_view;
-#else
+// #if __cplusplus >= 201703L
+// using StringRef = std::string_view;
+// using StringSlice = std::string_view;
+// #else
 using StringRef = const std::string&;
 using StringSlice = std::string;
-#endif
+// #endif
 
 namespace serialization {
 
@@ -200,9 +200,9 @@ struct imemstream : virtual membuf, std::istream {
   imemstream(const char* data, size_t size)
       : membuf(data, size), std::istream(static_cast<std::streambuf*>(this)) {}
   imemstream(const std::string& str) : imemstream(str.data(), str.size()) {}
-#if __cplusplus >= 201703L
-  imemstream(std::string_view sv) : imemstream(sv.data(), sv.size()) {}
-#endif
+// #if __cplusplus >= 201703L
+//   imemstream(std::string_view sv) : imemstream(sv.data(), sv.size()) {}
+// #endif
 };
 
 // This should be incremented whenever the serialization format changes in any
@@ -679,10 +679,10 @@ inline std::string reflect(const Instance<T>& value) {
 inline std::string reflect(const std::string& s) { return s; }
 /*! Use an existing code string as-is. */
 inline const char* reflect(const char* s) { return s; }
-#if __cplusplus >= 201703L
-/*! Use an existing code string as-is. */
-inline std::string_view reflect(std::string_view s) { return s; }
-#endif
+// #if __cplusplus >= 201703L
+// /*! Use an existing code string as-is. */
+// inline std::string_view reflect(std::string_view s) { return s; }
+// #endif
 
 /*! Create a Type object representing a value's type.
  *  \code{.cpp}type_of(3.14f) -> Type<float>()\endcode
