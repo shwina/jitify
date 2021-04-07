@@ -45,7 +45,7 @@
 // unnecessary dependencies.
 #ifdef JITIFY_SERIALIZATION_ONLY
 
-#include <cuda/std/climits>
+#include <climits>
 #include <iostream>
 #include <sstream>
 #include <streambuf>
@@ -73,7 +73,7 @@
 #endif
 
 #include <algorithm>
-#include <cuda/std/climits>
+#include <climits>
 #include <cstring>
 #include <fstream>
 #include <functional>
