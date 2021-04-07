@@ -45,7 +45,7 @@
 // unnecessary dependencies.
 #ifdef JITIFY_SERIALIZATION_ONLY
 
-#include <climits>
+#include <cuda/std/climits>
 #include <iostream>
 #include <sstream>
 #include <streambuf>
@@ -73,7 +73,7 @@
 #endif
 
 #include <algorithm>
-#include <climits>
+#include <cuda/std/climits>
 #include <cstring>
 #include <fstream>
 #include <functional>
@@ -3172,7 +3172,7 @@ DEFINE_MATH_UNARY_FUNC_WRAPPER(nearbyint)
 )");
 
 // TODO: offsetof
-JITIFY_DEFINE_C_AND_CXX_HEADERS_EX(stddef, "#include <climits>", R"(
+JITIFY_DEFINE_C_AND_CXX_HEADERS_EX(stddef, "#include <cuda/std/climits>", R"(
 #if __cplusplus >= 201103L
 typedef decltype(nullptr) nullptr_t;
 #if defined(_MSC_VER)
@@ -3200,7 +3200,7 @@ using ::ptrdiff_t;
 )");
 
 JITIFY_DEFINE_C_AND_CXX_HEADERS(stdint, R"(
-#include <climits>
+#include <cuda/std/climits>
 #define INT8_MIN SCHAR_MIN
 #define INT16_MIN SHRT_MIN
 #define INT32_MIN INT_MIN
@@ -3461,7 +3461,7 @@ struct iterator_traits<T const*> {
 static const char* const jitsafe_header_limits = R"(
 #pragma once
 #include <cfloat>
-#include <climits>
+#include <cuda/std/climits>
 #include <cstdint>
 // TODO: epsilon(), infinity(), etc
 namespace std {
