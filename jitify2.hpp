@@ -5844,7 +5844,19 @@ class ProgramCache {
           [&](std::istream& istream) {
             return LinkedProgram::deserialize(istream);
           });
-      if (!error.empty()) return LoadedProgram::Error(error);
+
+      if (!error.empty())
+      {
+        // it's possible another process interfered with our ability to create the file cache,
+        // likely because that other process was attempting to create the file cache. Let's
+        // optimistically ignore the file caching error and instead build and link the program
+        // ourselves to use for in-memory caching. There may be better ways to handle this,
+        // but this works until Jitify2 provides a better solution in an upstream branch.
+        linked = build_linked_program(name_expressions, extra_header_sources,
+                                        extra_compiler_options,
+                                        extra_linker_options);
+      }
+
       if (!linked) return LoadedProgram::Error(linked.error());
       *value = linked->load();
       if (!*value) return LoadedProgram::Error(value->error());
