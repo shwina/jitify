@@ -1821,6 +1821,7 @@ inline std::string path_base(const std::string& p) {
 }
 
 inline std::string path_join(StringRef p1, StringRef p2) {
+#if defined _WIN32 || defined _WIN64
   // Note that Windows supports both forward and backslash path separators.
   const char* sep = "/\\";
 #else
